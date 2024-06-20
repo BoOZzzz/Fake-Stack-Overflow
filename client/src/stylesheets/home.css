@@ -1,0 +1,42 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .welcome-heading {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .login-button,
+  .register-button,
+  .guest-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button {
+    background-color: #0077cc;
+    color: white;
+  }
+  
+  .register-button {
+    background-color: #ff8800;
+    color: white;
+  }
+  
+  .guest-button {
+    background-color: white;
+    color: #0077cc;
+    border: 1px solid #0077cc;
+  }
