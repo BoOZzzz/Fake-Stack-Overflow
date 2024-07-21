@@ -122,7 +122,9 @@ app.put('/questions/:qid/views', async (req, res) => {
 app.post('/tags', async (req, res) => {
   console.log('Received request to create tag:', req.body);
   const { name } = req.body;
-
+  if (!name || name.trim() === "") {
+    return res.status(400).json({ error: "Tag name cannot be empty" });
+  }
   try {
     const existingTag = await Tag.findOne({ name });
     if (existingTag) {
@@ -148,6 +150,7 @@ app.post('/questions', async (req, res) => {
       const tag = await Tag.findOne( {name: tags[i]} );
       tagArray.push(tag);
   }
+  console.log("tag array"+ tagArray);
   const question = new Question({ title: title, text: text, tags: tagArray, 
     answers: answers, asked_by: asked_by, ask_date_time: ask_date_time, views: views, summary:summary });
  

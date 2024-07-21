@@ -41,7 +41,7 @@ export default function AskForm({model, updateQuestion, username}) {
     event.preventDefault();
     const questionTitle = document.getElementById('qTitle').value;
     const questionText = document.getElementById('qText').value;
-    const questionTags = document.getElementById('qTags').value.toString().split(" ");
+    const questionTags = document.getElementById('qTags').value.toString().split(" ").filter(tag => tag.trim() !== "");;
     const questionSum = document.getElementById('summary').value;
     console.log(questionTags);
     if (questionTags.length > 5) {
@@ -62,13 +62,14 @@ export default function AskForm({model, updateQuestion, username}) {
     }else{
       let form = document.getElementById("questionForm");
       if(form.checkValidity()){
-          let i;
-          for(i = 0; i <questionTags.length; i++){
-              axios.post(`http://localhost:8000/tags/`, { name: questionTags[i] })
-              
-          }
-          console.log(questionTags);
-          axios.post('http://localhost:8000/questions', {
+        try {
+          // Create or fetch all tags
+          await Promise.all(questionTags.map(tag =>
+            axios.post(`http://localhost:8000/tags/`, { name: tag })
+          ));
+          
+          // Post the question
+          await axios.post('http://localhost:8000/questions', {
             title: questionTitle,
             text: questionText,
             tags: questionTags,
@@ -78,11 +79,12 @@ export default function AskForm({model, updateQuestion, username}) {
             views: 0,
             votes: 0,
             summary: questionSum
-          })
-          .then(() => {
-            navigate("/home");
-          })
-          
+          });
+  
+          navigate("/home");
+        } catch (error) {
+          console.error('Error posting question:', error);
+        }
       }else {
           alert("please fill in the required fields");
       }

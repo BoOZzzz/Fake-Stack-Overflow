@@ -39,7 +39,8 @@ export default function Header({searchTab, loggedIn, username}) {
                     ) : (
                         <p>Welcome, {username}!</p>
                     )}
-                    <button onClick={handleLogoutClick}>log Out</button>
+                    <button onClick={handleLogoutClick}>Log Out</button>
+                    <button style={{marginLeft: '20px'}}>Profile</button>
                 </div>
                 
             ):(
