@@ -76,6 +76,10 @@ function App({loggedIn, setLoggedIn}) {
     
   }
 
+  const profileTab = () => {
+    setTab("profile");
+  }
+  
   const questionForm = () => {
     setTab("askForm");
   }
@@ -121,6 +125,7 @@ function App({loggedIn, setLoggedIn}) {
     setTab("searchUnanswered");
   }
 
+  
   const sortByUnanswered = (object) => {
     let answered = object.filter(filterFunction);
     return answered;

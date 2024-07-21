@@ -5,7 +5,7 @@ import axios from 'axios';
 function QuestionList({searchTab, click, model, userData}) {
     const [currentPage, setCurrentPage] = useState(1);
     const questionsPerPage = 5;
-    console.log(model);
+    //console.log(model);
     const author = model.asked_by;
     const indexOfLastQuestion = currentPage * questionsPerPage;
     const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
@@ -47,6 +47,7 @@ function QuestionList({searchTab, click, model, userData}) {
     }
     
     const createTagButtons = (tags) => {
+        console.log(tags);
         return tags.map((tag) => (
         <button
             key={tag._id}
